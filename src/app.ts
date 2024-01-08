@@ -1,6 +1,7 @@
 import fastify from 'fastify'
 import { z } from 'zod'
 import { env } from './env'
+import { organizationRoutes } from './http/controllers/organizations/routes'
 
 export const app = fastify({
   logger: env.NODE_ENV === 'development',
@@ -9,6 +10,8 @@ export const app = fastify({
 app.get('/', async (_, reply) => {
   return reply.send({ message: 'Find A Friend API' })
 })
+
+app.register(organizationRoutes)
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof z.ZodError) {
