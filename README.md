@@ -6,7 +6,7 @@
 - [] ***It should be possible to filter pets by their characteristics.*** 
 - [] ***It should be possible to view details of a pet available for adoption.*** 
 - [X] ***It should be possible to register as an organization (ORG).*** 
-- [] ***It should be possible to log in as an organization (ORG).*** 
+- [X] ***It should be possible to log in as an organization (ORG).*** 
 
 ### Business Rules
 

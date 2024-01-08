@@ -1,4 +1,6 @@
 import fastify from 'fastify'
+import fastifyCookie from '@fastify/cookie'
+import fastifyJwt from '@fastify/jwt'
 import { z } from 'zod'
 import { env } from './env'
 import { organizationRoutes } from './http/controllers/organizations/routes'
@@ -6,6 +8,18 @@ import { organizationRoutes } from './http/controllers/organizations/routes'
 export const app = fastify({
   logger: env.NODE_ENV === 'development',
 })
+
+app.register(fastifyJwt, {
+  secret: env.JWT_SECRET,
+  cookie: {
+    cookieName: 'refreshToken',
+    signed: false,
+  },
+  sign: {
+    expiresIn: '10m',
+  },
+})
+app.register(fastifyCookie)
 
 app.get('/', async (_, reply) => {
   return reply.send({ message: 'Find A Friend API' })
